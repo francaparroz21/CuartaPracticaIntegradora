@@ -1,28 +1,43 @@
-<h1>Cart {{idCart}}</h1>
-<div>
-    <table>
-        <tr> 
-            <th>ID</th>
-            <th>Title</th>
-            <th>Description</th> 
-            <th>Price</th> 
-            <th>Code</th> 
-            <th>Category</th> 
-            <th>Quantity</th>
-        </tr>
-        <tbody>
-            {{#each products}}
-                <tr>
-                    <td>{{this.product._id}}</td>
-                    <td>{{this.product.title}}</td>
-                    <td>{{this.product.description}}</td>
-                    <td>{{this.product.price}}</td>
-                    <td>{{this.product.code}}</td>
-                    <td>{{this.product.category}}</td>
-                    <td>{{this.quantity}}</td>
-                </tr>
-            {{/each}}
-        </tbody>
-    </table>
+<div class="container">
+    <div class="navButton-container">
+        <a href="/profile" ><button class="navButton">Ver mi perfil</button></a>
+        <a href="/products"><button class="navButton">Ir a productos</button></a> 
+        <a href="/chat" ><button class="navButton">Ir al chat</button></a>
+    </div>
+    <h1 class="page-title">Este es tu carrito</h1>
 
+    <div class="products-container">
+        {{#if showProducts}}
+            {{#each products}}
+                <div class="product-row">
+                    <div class="product-image">
+                        <img src="{{this.product.thumbnail}}" alt="Imagen de {{this.product.name}}">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-features"><strong>Nombre: {{this.product.name}}</strong></p>
+                        <p class="product-features">Cantidad: {{this.quantity}}</p>
+                        <p class="product-features">Precio x unidad: $ {{this.product.price}}</p>
+                        <button class="btn-delete-product" prodId="{{this.product.id}}" >Eliminar producto </button>
+                    </div>
+                </div>
+            {{/each}}
+        {{else}}
+            <p class="error-text">¡El carrito está vacío!</p>
+        {{/if}}
+    </div>
+    
+    {{#if showProducts}}
+    <div class="summary">
+        <h2>Total de la compra: {{amount}} </h2>
+        <button class="navButton" id="purchase-button" cart-id="{{cart.id}}">Continuar con la compra</button>
+    </div>
+    <div class="actions">
+        <button class="btn-empty-cart" id="empty-cart">Vaciar carrito</button>
+    </div>
+    {{else}}
+        <div></div>
+    {{/if}}
 </div>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/cart.js"></script>

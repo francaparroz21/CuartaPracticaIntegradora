@@ -18,6 +18,7 @@ describe('Testing Products Manager', () => {
         this.timeout(7000)
     });
 
+
     it("The DELETE method of Products must be delete a product", async function(){
         let mockProductPost = {
             title: "Delete Product Test Create",

@@ -1,5 +1,3 @@
-
-
 const addToCartButtons = document.querySelectorAll('button[data-product-id]');
 const cartIdElement = document.getElementById('cartId');
 const cartId = cartIdElement.innerText;

@@ -7,7 +7,6 @@ const router = Router();
 
 router.get('/', addLogger, getProductsController);
 
-
 router.get('/carts/:cid', addLogger, getCartController);
 
 router.get('/register', addLogger, registerController);

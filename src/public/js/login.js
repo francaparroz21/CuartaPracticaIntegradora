@@ -1,23 +1,35 @@
-const form = document.getElementById("loginForm");
+const form = document.querySelector("#loginForm");
+const notification = document.querySelector('#notif');
 
-form.addEventListener('submit', e =>{
+form.addEventListener('submit', e => {
     e.preventDefault();
 
     const data = new FormData(form);
-
     const obj = {};
 
-    data.forEach((value,key) => obj[key]=value)
+    data.forEach((value, key) => obj[key] = value);
 
-    fetch('/api/sessions/login',{
-        method: 'POST',
-        body: JSON.stringify(obj),
-        headers: {
-            'Content-Type': 'application/json'
+    const url = '/api/auth';
+    const headers = {
+        'Content-Type': 'application/json'
+    }
+    const method = 'POST';
+    const body = JSON.stringify(obj);
+
+    fetch(url, {
+        headers,
+        method,
+        body
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        if(data.status !== 'success') {
+            notification.innerHTML = `<p class="p-notification" id="notification-text">${data.message? data.message : data.error}</p>`
+            notification.style.visibility = 'visible';
+        } else {
+            window.location.href = '/products'
         }
-    }).then(result=>{
-        if(result.status == 200){
-            window.location.replace('/');
-        }
-    });
+    })
+    .catch(error => console.log(error))
 });

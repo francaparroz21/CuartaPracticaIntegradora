@@ -179,6 +179,7 @@ export const buyCartController = async (req, res) => {
     try {
         let cartId = req.params.cid;
         let result = await cartService.buyCart(cartId);
+        
         res.send({ result: "success", payload: result });
     } catch (error) {
         req.logger.error('Cannot buy cart with mongoose: ' + error)

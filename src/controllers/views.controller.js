@@ -38,6 +38,7 @@ export const getProductsController = async (req, res) => {
 
         const result = await productService.getProducts(query, options);
 
+
         
         res.render('home', { 
             products: result.docs,
